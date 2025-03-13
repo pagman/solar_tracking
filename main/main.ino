@@ -4,8 +4,8 @@
 #define LDR_BL A2  // Bottom Left
 #define LDR_BR A3  // Bottom Right
 //define motor control pins
-#define MOTOR1_IN1 3
-#define MOTOR1_IN2 4
+#define MOTOR1_IN1 5
+#define MOTOR1_IN2 6
 // #define MOTOR2_IN3 5
 // #define MOTOR2_IN4 6
 
@@ -44,7 +44,7 @@ void loop() {
   // delay(3000); // Run for 3 seconds
 
     // Stop
-  digitalWrite(MOTOR1_IN1, LOW);
+  digitalWrite(MOTOR1_IN1, HIGH);
   digitalWrite(MOTOR1_IN2, LOW);
   delay(2000); // Pause for 2 seconds
 
