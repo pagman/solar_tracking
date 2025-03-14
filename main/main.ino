@@ -10,24 +10,53 @@
 #define MOTOR2_IN4 6
 
 
-int threshold = 50;
+int threshold = 100;  // Sensitivity threshold
 // the setup function runs once when you press reset or power the board
 void setup() {
   pinMode(MOTOR1_IN1, OUTPUT);
   pinMode(MOTOR1_IN2, OUTPUT);
   pinMode(MOTOR2_IN3, OUTPUT);
   pinMode(MOTOR2_IN4, OUTPUT);
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  // int TL = analogRead(LDR_TL); 
-  // int TR = analogRead(LDR_TR);
-  // int BL = analogRead(LDR_BL);
-  // int BR = analogRead(LDR_BR);          
+  int TL = analogRead(LDR_TL); 
+  int TR = analogRead(LDR_TR);
+  int BL = analogRead(LDR_BL);
+  int BR = analogRead(LDR_BR);
+
+  int horizontal = (TL + BL) - (TR + BR);
+  int vertical = (TL + TR) - (BL + BR);
+
+  Serial.print("H: "); Serial.print(horizontal);
+  Serial.print(" | V: "); Serial.println(vertical);  
+  Serial.print("\n"); 
+  // Horizontal movement
+  if (horizontal > threshold) {
+    Serial.print("Move left\n"); 
+    moveMotor(MOTOR1_IN1, MOTOR1_IN2, 1);  // Move left
+  } else if (horizontal < -threshold) {
+    Serial.print("Move right\n"); 
+    moveMotor(MOTOR1_IN1, MOTOR1_IN2, 0);  // Move right
+  } else {
+    Serial.print("Stop\n"); 
+    stopMotor(MOTOR1_IN1, MOTOR1_IN2);
+  }
+
+    // Vertical movement
+  if (vertical > threshold) {
+    Serial.print("Move up\n"); 
+    moveMotor(MOTOR2_IN3, MOTOR2_IN4, 1);  // Move up
+  } else if (vertical < -threshold) {
+    Serial.print("Move down\n"); 
+    moveMotor(MOTOR2_IN3, MOTOR2_IN4, 0);  // Move down
+  } else {
+    Serial.print("Stop\n"); 
+    stopMotor(MOTOR2_IN3, MOTOR2_IN4);
+  }
+    delay(500);       
   // Serial.print("TL: ");
   // Serial.print(TL);
   // Serial.print(" TR: ");
@@ -42,26 +71,38 @@ void loop() {
   // digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
   // delay(200); // Run for 3 seconds
 
-    // Stop
-  digitalWrite(MOTOR1_IN1, HIGH);
-  digitalWrite(MOTOR1_IN2, LOW);
-  digitalWrite(MOTOR2_IN3, HIGH);
-  digitalWrite(MOTOR2_IN4, LOW);
-  delay(2000); // Pause for 2 seconds
+  //   // Stop
+  // digitalWrite(MOTOR1_IN1, HIGH);
+  // digitalWrite(MOTOR1_IN2, LOW);
+  // digitalWrite(MOTOR2_IN3, HIGH);
+  // digitalWrite(MOTOR2_IN4, LOW);
+  // delay(2000); // Pause for 2 seconds
 
-    // Move Backward
-  digitalWrite(MOTOR1_IN1, LOW);
-  digitalWrite(MOTOR1_IN2, HIGH);
-  digitalWrite(MOTOR2_IN3, LOW);
-  digitalWrite(MOTOR2_IN4, HIGH);
-  delay(3000); // Run for 3 seconds
+  //   // Move Backward
+  // digitalWrite(MOTOR1_IN1, LOW);
+  // digitalWrite(MOTOR1_IN2, HIGH);
+  // digitalWrite(MOTOR2_IN3, LOW);
+  // digitalWrite(MOTOR2_IN4, HIGH);
+  // delay(3000); // Run for 3 seconds
 
-    // Stop
-  digitalWrite(MOTOR1_IN1, LOW);
-  digitalWrite(MOTOR1_IN2, LOW);
-  digitalWrite(MOTOR2_IN3, LOW);
-  digitalWrite(MOTOR2_IN4, LOW);
-  delay(2000); // Pause for 2 seconds   
+  //   // Stop
+  // digitalWrite(MOTOR1_IN1, LOW);
+  // digitalWrite(MOTOR1_IN2, LOW);
+  // digitalWrite(MOTOR2_IN3, LOW);
+  // digitalWrite(MOTOR2_IN4, LOW);
+  // delay(2000); // Pause for 2 seconds
+}
+void moveMotor(int in1, int in2, bool direction) {
+    if (direction) {
+        digitalWrite(in1, HIGH);
+        digitalWrite(in2, LOW);
+    } else {
+        digitalWrite(in1, LOW);
+        digitalWrite(in2, HIGH);
+    }
+}
 
-
+void stopMotor(int in1, int in2) {
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, LOW);
 }
