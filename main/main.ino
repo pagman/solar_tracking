@@ -1,13 +1,13 @@
 // Define LDR pins
 #define LDR_TL A0  // Top Left
 #define LDR_TR A1  // Top Right
-#define LDR_BL A2  // Bottom Left
-#define LDR_BR A3  // Bottom Right
+#define LDR_BL A3  // Bottom Left
+#define LDR_BR A2  // Bottom Right
 //define motor control pins
-#define MOTOR1_IN1 5
-#define MOTOR1_IN2 6
-// #define MOTOR2_IN3 5
-// #define MOTOR2_IN4 6
+#define MOTOR1_IN1 3
+#define MOTOR1_IN2 4
+#define MOTOR2_IN3 5
+#define MOTOR2_IN4 6
 
 
 int threshold = 50;
@@ -15,6 +15,8 @@ int threshold = 50;
 void setup() {
   pinMode(MOTOR1_IN1, OUTPUT);
   pinMode(MOTOR1_IN2, OUTPUT);
+  pinMode(MOTOR2_IN3, OUTPUT);
+  pinMode(MOTOR2_IN4, OUTPUT);
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
@@ -38,24 +40,27 @@ void loop() {
   // digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
   // delay(200);                      // wait for a second
   // digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
-  // delay(200);   
-  // digitalWrite(LPWM, HIGH);
-  // digitalWrite(RPWM, LOW);
-  // delay(3000); // Run for 3 seconds
+  // delay(200); // Run for 3 seconds
 
     // Stop
   digitalWrite(MOTOR1_IN1, HIGH);
   digitalWrite(MOTOR1_IN2, LOW);
+  digitalWrite(MOTOR2_IN3, HIGH);
+  digitalWrite(MOTOR2_IN4, LOW);
   delay(2000); // Pause for 2 seconds
 
     // Move Backward
   digitalWrite(MOTOR1_IN1, LOW);
   digitalWrite(MOTOR1_IN2, HIGH);
+  digitalWrite(MOTOR2_IN3, LOW);
+  digitalWrite(MOTOR2_IN4, HIGH);
   delay(3000); // Run for 3 seconds
 
     // Stop
   digitalWrite(MOTOR1_IN1, LOW);
   digitalWrite(MOTOR1_IN2, LOW);
+  digitalWrite(MOTOR2_IN3, LOW);
+  digitalWrite(MOTOR2_IN4, LOW);
   delay(2000); // Pause for 2 seconds   
 
 
