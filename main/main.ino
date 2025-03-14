@@ -4,8 +4,8 @@
 #define LDR_BL A3  // Bottom Left
 #define LDR_BR A2  // Bottom Right
 //define motor control pins
-#define MOTOR1_IN1 3
-#define MOTOR1_IN2 4
+#define MOTOR1_IN1 4
+#define MOTOR1_IN2 3
 #define MOTOR2_IN3 5
 #define MOTOR2_IN4 6
 
@@ -57,40 +57,7 @@ void loop() {
     stopMotor(MOTOR2_IN3, MOTOR2_IN4);
   }
     delay(500);       
-  // Serial.print("TL: ");
-  // Serial.print(TL);
-  // Serial.print(" TR: ");
-  // Serial.print(TR);
-  // Serial.print(" BL: ");
-  // Serial.print(BL);
-  // Serial.print(" BR: ");
-  // Serial.print(BR);
-  // Serial.print("\n");
-  // digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
-  // delay(200);                      // wait for a second
-  // digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
-  // delay(200); // Run for 3 seconds
 
-  //   // Stop
-  // digitalWrite(MOTOR1_IN1, HIGH);
-  // digitalWrite(MOTOR1_IN2, LOW);
-  // digitalWrite(MOTOR2_IN3, HIGH);
-  // digitalWrite(MOTOR2_IN4, LOW);
-  // delay(2000); // Pause for 2 seconds
-
-  //   // Move Backward
-  // digitalWrite(MOTOR1_IN1, LOW);
-  // digitalWrite(MOTOR1_IN2, HIGH);
-  // digitalWrite(MOTOR2_IN3, LOW);
-  // digitalWrite(MOTOR2_IN4, HIGH);
-  // delay(3000); // Run for 3 seconds
-
-  //   // Stop
-  // digitalWrite(MOTOR1_IN1, LOW);
-  // digitalWrite(MOTOR1_IN2, LOW);
-  // digitalWrite(MOTOR2_IN3, LOW);
-  // digitalWrite(MOTOR2_IN4, LOW);
-  // delay(2000); // Pause for 2 seconds
 }
 void moveMotor(int in1, int in2, bool direction) {
     if (direction) {
